@@ -12,6 +12,10 @@ cd "$PROJECT_ROOT/build"
 cmake ..
 make
 
-# Run the program
-WAYLAND_DISPLAY=wayland-99 ./aeris $@
 
+XPWD=$PWD
+cd $PROJECT_ROOT/shell
+flutter build linux --debug
+cd $XPWD
+echo "WAYLAND_DISPLAY=wayland-99"
+WAYLAND_DISPLAY=wayland-99 ./aeris --component $PROJECT_ROOT/shell/build/linux/x64/release/bundle/shell $@
